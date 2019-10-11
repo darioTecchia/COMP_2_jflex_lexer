@@ -1,5 +1,6 @@
 /* JFlex example: part of Java language lexer specification */
-// import java_cup.runtime.*;
+
+import java_cup.runtime.Symbol;
 /**
 * This class is a simple example lexer.
 */
@@ -8,8 +9,9 @@
 %%
 
 %class Lexer
-%type Token
-%function nextToken
+%cupsym Token
+
+%cup
 
 %unicode
 
@@ -19,11 +21,11 @@
 %{
   StringBuffer string = new StringBuffer();
 
-  private Token generateToken(int type) {
-    return new Token(type, yyline, yycolumn);
+  private Symbol generateToken(int type) {
+    return new Symbol(type);
   }
-  private Token generateToken(int type, Object value) {
-    return new Token(type, yyline, yycolumn, value);
+  private Symbol generateToken(int type, Object value) {
+    return new Symbol(type, value);
   }
 
   // prepara file input per lettura e controlla errori
