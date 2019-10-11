@@ -16,7 +16,10 @@ public class Tester {
 					if(token.sym == Token.EOF) {
 						break;
 					}
-					System.out.println(Token.TOKENS[token.sym]);
+					String toRet = "<" +
+							Token.TOKENS[token.sym] +
+							(token.value == null ? ">" : (", "+token.value+">"));
+					System.out.println(toRet);
 				}
 			} catch (Exception e) {
 				System.out.println("File parsing ended!!");
