@@ -25,17 +25,17 @@ Programming language definited for the Compiler course from University.
 |**Numbers**|
 |Any number|NUM|Pointer to table entry|
 |**Relops**|
-|<|relop|LT|
-|<=|relop|LE|
-|=|relop|EQ|
-|<>|relop|NE|
-|>|relop|GT|
-|>=|relop|GE|
-|<--|relop|ASSIGN|
+|<|<|LT|
+|<=|<=|LE|
+|=|=|EQ|
+|<>|<>|NE|
+|>|>|GT|
+|>=|>=|GE|
+|<--|<--|ASSIGN|
 
 ## Grammar Specification
 
 --
 
 ## Notes
-The number DFA implementation is from the Book.
+The requested *sym* class is named Token
