@@ -1,13 +1,37 @@
-# YASP
+# YASPL
 
 Programming language definited for the Compiler course from University.
 
+### Project Part 2
+JFlex Coded Lexer
+
+## Regular Definition
+
+|Regular Definition | Regular Expression|
+|-------------------|-------------------|
+|LineTerminator | `\r|\n|\r\n` |
+|InputCharacter | `[^\r\n]` |
+|WhiteSpace | `{LineTerminator} | [ \t\f]` |
+|||
+|Comment | `{TraditionalComment} | {EndOfLineComment} | {DocumentationComment}` |
+|TraditionalComment | `"/*" [^*] ~"*/" | "/*" "*"+ "/"` |
+|EndOfLineComment | `"//" {InputCharacter}* {LineTerminator}?` |
+|DocumentationComment | `"/**" {CommentContent} "*"+ "/"` |
+|CommentContent | `( [^*] | \*+ [^/*] )*` |
+|||
+|Identifier | `[:jletter:] [:jletterdigit:]*` |
+|||
+|IntegerLiteral | `0 | [1-9][0-9]*` |
+|||
+|FloatLiteral | `(0 | [1-9][0-9]*)\.[0-9]+` |
+
 ## Lexical Specification
 
-|Token |Lexeme|Attribute|
+|Token |Lexeme or Regular Definition|Attribute|
 |------|------|---------|
 |**Delimiters**|
-|*-*|Any WS|-|
+|*-*|WhiteSpace|-|
+||||
 |**Separators**|
 |LPAR|(|-|
 |RPAR|)|-|
@@ -15,15 +39,20 @@ Programming language definited for the Compiler course from University.
 |RBRA|}|-|
 |COMMA|,|-|
 |SEMI|;|-|
+||||
 |**Keywords**|
 |IF|if|-|
 |THEN|then|-|
 |ELSE|else|-|
 |WHILE|while|-|
+||||
 |**Identifiers**|
-|Any ID|id|Pointer to table entry|
+|ID|Identifier|Pointer to table entry|
+||||
 |**Numbers**|
-|Any number|NUM|Pointer to table entry|
+|INT|IntegerLiteral|Pointer to table entry|
+|FLOAT|FloatLiteral|Pointer to table entry|
+||||
 |**Relops**|
 |<|<|LT|
 |<=|<=|LE|
