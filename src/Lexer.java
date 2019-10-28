@@ -428,6 +428,13 @@ class Lexer implements java_cup.runtime.Scanner {
     return new Symbol(type, value);
   }
 
+  private Symbol generateError() {
+    return new Symbol(Token.ERROR);
+  }
+  private Symbol generateError(Object value) {
+    return new Symbol(Token.ERROR, value);
+  }
+
   // prepara file input per lettura e controlla errori
   public boolean initialize(String filePath) {
     try {
@@ -827,7 +834,8 @@ class Lexer implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { throw new Error("Illegal character <"+yytext()+"> on L: " + yyline + " C: " + yycolumn);
+            { System.err.println("Illegal character <" + yytext() + "> on L: " + yyline + " C: " + yycolumn);
+  return generateError(yytext());
             } 
             // fall through
           case 24: break;

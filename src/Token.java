@@ -33,6 +33,9 @@ public class Token {
   /* Identifier */
   public static final int ID = 19;
 
+  /* Errors */
+  public static final int ERROR = 20;
+
   public static final int EOF = -1;
 
   public static final String[] TOKENS = {
@@ -55,7 +58,8 @@ public class Token {
     "RBRA",
     "COMMA",
     "SEMI",
-    "ID"
+    "ID",
+    "ERROR"
   };
 
 }

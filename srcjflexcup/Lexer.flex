@@ -28,6 +28,13 @@ import java_cup.runtime.Symbol;
     return new Symbol(type, value);
   }
 
+  private Symbol generateError() {
+    return new Symbol(Token.ERROR);
+  }
+  private Symbol generateError(Object value) {
+    return new Symbol(Token.ERROR, value);
+  }
+
   // prepara file input per lettura e controlla errori
   public boolean initialize(String filePath) {
     try {
@@ -111,6 +118,7 @@ FloatLiteral = (0 | [1-9][0-9]*)\.[0-9]+
 <<EOF>> { return generateToken(Token.EOF); }
 
 /* error fallback */
-[^] { 
-  throw new Error("Illegal character <"+yytext()+"> on L: " + yyline + " C: " + yycolumn); 
+[^] {
+  System.err.println("Illegal character <" + yytext() + "> on L: " + yyline + " C: " + yycolumn);
+  return generateError(yytext());
 }

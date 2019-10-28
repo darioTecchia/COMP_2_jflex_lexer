@@ -9,7 +9,7 @@ import java_cup.runtime.Symbol;
 
 
 
-class Lexer {
+class Lexer implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -428,6 +428,13 @@ class Lexer {
     return new Symbol(type, value);
   }
 
+  private Symbol generateError() {
+    return new Symbol(Token.ERROR);
+  }
+  private Symbol generateError(int type, Object value) {
+    return new Symbol(Token.ERROR, value);
+  }
+
   // prepara file input per lettura e controlla errori
   public boolean initialize(String filePath) {
     try {
@@ -665,13 +672,25 @@ class Lexer {
 
 
   /**
+   * Contains user EOF-code, which will be executed exactly once,
+   * when the end of file is reached
+   */
+  private void zzDoEOF() throws java.io.IOException {
+    if (!zzEOFDone) {
+      zzEOFDone = true;
+      yyclose();
+    }
+  }
+
+
+  /**
    * Resumes scanning until the next regular expression is matched,
    * the end of input is encountered or an I/O-Error occurs.
    *
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public Yytoken yylex() throws java.io.IOException {
+  public java_cup.runtime.Symbol next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -807,6 +826,7 @@ class Lexer {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
+            zzDoEOF();
               {
                 return generateToken(Token.EOF);
               }
@@ -814,7 +834,8 @@ class Lexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { throw new Error("Illegal character <"+yytext()+"> on L: " + yyline + " C: " + yycolumn);
+            { System.err.println("Illegal character <" + yytext() + "> on L: " + yyline + " C: " + yycolumn);
+  return generateError(yytext());
             } 
             // fall through
           case 24: break;
