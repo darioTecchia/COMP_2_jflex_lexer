@@ -9,21 +9,21 @@ JFlex Coded Lexer
 
 |Regular Definition | Regular Expression|
 |-------------------|-------------------|
-|LineTerminator | `\r|\n|\r\n` |
+|LineTerminator | `\r\|\n\|\r\n` |
 |InputCharacter | `[^\r\n]` |
-|WhiteSpace | `{LineTerminator} | [ \t\f]` |
+|WhiteSpace | `{LineTerminator} \| [ \t\f]` |
 |||
-|Comment | `{TraditionalComment} | {EndOfLineComment} | {DocumentationComment}` |
-|TraditionalComment | `"/*" [^*] ~"*/" | "/*" "*"+ "/"` |
+|Comment | `{TraditionalComment} \| {EndOfLineComment} \| {DocumentationComment}` |
+|TraditionalComment | `"/*" [^*] ~"*/" \| "/*" "*"+ "/"` |
 |EndOfLineComment | `"//" {InputCharacter}* {LineTerminator}?` |
 |DocumentationComment | `"/**" {CommentContent} "*"+ "/"` |
-|CommentContent | `( [^*] | \*+ [^/*] )*` |
+|CommentContent | `( [^*] \| \*+ [^/*] )*` |
 |||
 |Identifier | `[:jletter:] [:jletterdigit:]*` |
 |||
-|IntegerLiteral | `0 | [1-9][0-9]*` |
+|IntegerLiteral | `0 \| [1-9][0-9]*` |
 |||
-|FloatLiteral | `(0 | [1-9][0-9]*)\.[0-9]+` |
+|FloatLiteral | `(0 \| [1-9][0-9]*)\.[0-9]+` |
 
 ## Lexical Specification
 
