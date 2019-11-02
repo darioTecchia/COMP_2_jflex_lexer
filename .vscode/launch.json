@@ -5,14 +5,7 @@
       "name": "CodeLens (Launch) - Tester",
       "request": "launch",
       "mainClass": "Tester",
-      "projectName": "Esercitazione1 (2)"
-    },
-    {
-      "type": "java",
-      "name": "CodeLens (Launch) - Tester",
-      "request": "launch",
-      "mainClass": "Tester",
-      "projectName": "Esercitazione1"
+      "projectName": "Esercitazione2"
     }
   ]
 }
