@@ -66,12 +66,7 @@ IntegerLiteral = 0 | [1-9][0-9]*
 
 FloatLiteral = (0 | [1-9][0-9]*)\.[0-9]+
 
-
-%state STRING
-
-
 %%
-
 
 <YYINITIAL> {
 
@@ -104,9 +99,6 @@ FloatLiteral = (0 | [1-9][0-9]*)\.[0-9]+
   /* literals */
   {IntegerLiteral}   { return generateToken(Token.INT, Integer.parseInt(yytext())); }
   {FloatLiteral}   { return generateToken(Token.FLOAT, Double.parseDouble(yytext())); }
-
-  // WHEN " IS REACHED IT'S STARTING A STRING
-  \" { string.setLength(0); yybegin(STRING); }
 
   /* comments */
   {Comment} {/* ignore */}
